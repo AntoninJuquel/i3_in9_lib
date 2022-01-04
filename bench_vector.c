@@ -78,7 +78,26 @@ void read_write_sequential(p_s_vector p_vector, size_t n)
 
 void bubble_sort(p_s_vector p_vector, size_t n)
 {
-    
+    printf("Write all values of tab and sort %ld times\n", n);
+    for (size_t a = 0; a < n; a++)
+    {
+        read_write_sequential(p_vector, 1);
+
+        double tmp = 0;
+        for (size_t i = p_vector->size - 1; i > 0; i--)
+        {
+            for (size_t j = 0; j < i; j++)
+            {
+                if (p_vector->tab[j + 1] < p_vector->tab[j])
+                {
+                    tmp = p_vector->tab[j + 1];
+                    p_vector->tab[j + 1] = p_vector->tab[j];
+                    p_vector->tab[j] = tmp;
+                }
+            }
+        }
+        vector_print(p_vector);
+    }
 }
 
 int main(int argc, char *argv[])
@@ -121,6 +140,8 @@ int main(int argc, char *argv[])
         read_write_random(vector, n);
     else if (strcmp(test_name, "read_write_sequential") == 0)
         read_write_sequential(vector, n);
+    else if (strcmp(test_name, "bubble_sort") == 0)
+        bubble_sort(vector, n);
     else
         printf("Write a valid test name\n");
 
