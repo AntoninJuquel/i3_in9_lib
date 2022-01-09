@@ -28,3 +28,4 @@ clean:
 	rm -f *.o
 	rm -f test_vector
 	rm -f test_random
+	rm -f bench_vector
