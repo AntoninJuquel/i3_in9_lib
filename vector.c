@@ -43,6 +43,10 @@ void vector_print(p_s_vector p_vector)
     for (size_t i = 0; i < p_vector->size - 1; i++)
         printf("%lf, ", p_vector->tab[i]);
     printf("%lf]\n", p_vector->tab[p_vector->size - 1]);
+    printf("size : %d\n", p_vector->size);
+#if V2
+    printf("capacity : %d\n", p_vector->capacity);
+#endif
 }
 
 void vector_set(p_s_vector p_vector, size_t i, double v)

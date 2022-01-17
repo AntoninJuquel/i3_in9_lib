@@ -52,3 +52,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#
+test_vector
+test_random
+bench_vector
+test_vector_v2
+bench_vector_v2
