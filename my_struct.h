@@ -3,7 +3,8 @@
 
 typedef struct struct_my_struct
 {
-    
+    char* txt;
+    double num;
 } s_my_struct;
 
 typedef s_my_struct *p_s_my_struct;
