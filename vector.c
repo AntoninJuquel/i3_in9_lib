@@ -39,13 +39,15 @@ void vector_realloc(p_s_vector p_vector, size_t n)
     if (p_vector->size >= p_vector->capacity)
     {
         p_vector->capacity *= 2;
-        p_vector->tab = realloc(p_vector->tab, sizeof(double) * p_vector->capacity);
+        n = sizeof(double) * p_vector->capacity;
+        p_vector->tab = realloc(p_vector->tab, n);
         //printf("realloc\n");
     }
     else if (p_vector->size <= p_vector->capacity / 4)
     {
         p_vector->capacity /= 2;
-        p_vector->tab = realloc(p_vector->tab, sizeof(double) * p_vector->capacity);
+        n = sizeof(double) * p_vector->capacity;
+        p_vector->tab = realloc(p_vector->tab, n);
         //printf("realloc\n");
     }
 #else

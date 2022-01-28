@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "random.h"
 
-int main(int argc, char *argv[])
+int main()
 {
     printf("DEBUT DES TEST\n");
 
