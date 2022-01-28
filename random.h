@@ -1,8 +1,6 @@
 #ifndef __RANDOM_H__
 #define __RANDOM_H__
 
-static unsigned long seed = 0;
-
 double random_double(double a, double b);
 float random_float(float a, float b); 
 size_t random_size_t(size_t a, size_t b);

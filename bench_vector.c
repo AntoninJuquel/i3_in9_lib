@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "random.h"
 #include "vector.h"
 
@@ -10,11 +11,16 @@ void insert_erase_random(p_s_vector p_vector, size_t n)
     {
         size_t position = random_size_t(0, p_vector->size - 1);
         double value = random_double(-10, 10);
-        printf("%ld :  tab[%ld] = %f\n", i, position, value);
+        //printf("%ld : insert %f at position %ld\n", i, value, position);
         vector_insert(p_vector, position, value);
-        vector_print(p_vector);
+        // vector_print(p_vector);
+    }
+    for (size_t i = 0; i < n; i++)
+    {
+        size_t position = random_size_t(0, p_vector->size - 1);
+        //printf("%ld : remove at position %ld\n", i, position);
         vector_erase(p_vector, position);
-        vector_print(p_vector);
+        // vector_print(p_vector);
     }
 }
 
@@ -104,7 +110,7 @@ int main(int argc, char *argv[])
 {
     printf("BENCH VECTOR\n");
 
-    char *test_name;
+    char *test_name = "";
     size_t size;
     size_t n;
 
@@ -115,7 +121,7 @@ int main(int argc, char *argv[])
         printf("Tests number\n");
         scanf("%ld", &n);
         printf("Test name\n");
-        scanf("%s", &test_name);
+        scanf("%s", &test_name[0]);
     }
     else
     {

@@ -10,8 +10,14 @@ p_s_vector vector_alloc(size_t n)
     if (vector == NULL)
         return vector;
 
-    vector->tab = malloc(sizeof(double) * n);
     vector->size = n;
+#if V2
+    vector->capacity = n > 16 ? n + 8 - (n % 16) : 16;
+    vector->tab = malloc(sizeof(double) * vector->capacity);
+#else
+    vector->tab = malloc(sizeof(double) * vector->size);
+#endif
+
     for (size_t i = 0; i < n; i++)
     {
         vector->tab[i] = 0.0;
@@ -24,6 +30,28 @@ p_s_vector vector_alloc(size_t n)
     }
 
     return vector;
+}
+
+void vector_realloc(p_s_vector p_vector, size_t n)
+{
+
+#if V2
+    if (p_vector->size >= p_vector->capacity)
+    {
+        p_vector->capacity *= 2;
+        p_vector->tab = realloc(p_vector->tab, sizeof(double) * p_vector->capacity);
+        //printf("realloc\n");
+    }
+    else if (p_vector->size <= p_vector->capacity / 4)
+    {
+        p_vector->capacity /= 2;
+        p_vector->tab = realloc(p_vector->tab, sizeof(double) * p_vector->capacity);
+        //printf("realloc\n");
+    }
+#else
+    p_vector->tab = realloc(p_vector->tab, sizeof(double) * n);
+    //printf("realloc\n");
+#endif
 }
 
 void vector_free(p_s_vector p_vector)
@@ -43,9 +71,9 @@ void vector_print(p_s_vector p_vector)
     for (size_t i = 0; i < p_vector->size - 1; i++)
         printf("%lf, ", p_vector->tab[i]);
     printf("%lf]\n", p_vector->tab[p_vector->size - 1]);
-    printf("size : %d\n", p_vector->size);
+    printf("size : %ld\n", p_vector->size);
 #if V2
-    printf("capacity : %d\n", p_vector->capacity);
+    printf("capacity : %ld\n", p_vector->capacity);
 #endif
 }
 
@@ -63,7 +91,7 @@ void vector_insert(p_s_vector p_vector, size_t i, double v)
         return;
 
     p_vector->size++;
-    p_vector->tab = realloc(p_vector->tab, sizeof(double) * p_vector->size);
+    vector_realloc(p_vector, sizeof(double) * p_vector->size);
     for (size_t j = p_vector->size - 1; j > i; j--)
     {
         p_vector->tab[j] = p_vector->tab[j - 1];
@@ -81,7 +109,7 @@ void vector_erase(p_s_vector p_vector, size_t i)
     {
         p_vector->tab[j] = p_vector->tab[j + 1];
     }
-    p_vector->tab = realloc(p_vector->tab, sizeof(double) * p_vector->size);
+    vector_realloc(p_vector, sizeof(double) * p_vector->size);
 }
 
 void vector_push_back(p_s_vector p_vector, double v)
@@ -98,7 +126,7 @@ void vector_pop_back(p_s_vector p_vector)
 void vector_clear(p_s_vector p_vector)
 {
     p_vector->size = 0;
-    p_vector->tab = realloc(p_vector->tab, sizeof(double) * p_vector->size);
+    vector_realloc(p_vector, sizeof(double) * p_vector->size);
 }
 
 int vector_empty(p_s_vector p_vector)

@@ -41,7 +41,8 @@ bench_vector_v2 : bench_vector_v2.o vector_v2.o random.o
 
 clean:
 	rm -f *.o
-	rm -f test_vector
 	rm -f test_random
-	rm -f bench_vector
+	rm -f test_vector
 	rm -f test_vector_v2
+	rm -f bench_vector
+	rm -f bench_vector_v2

@@ -4,9 +4,11 @@
 // TODO : ECRIRE DES TEST
 
 
-int main(int argc, char *argv [])
+int main()
 {
     printf("DEBUT DES TEST\n");
+
+    
 
     return 0;
 }

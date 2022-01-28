@@ -2,6 +2,8 @@
 #include <time.h>
 #include "random.h"
 
+static unsigned long seed = 0;
+
 double random_double(double a, double b)
 {
     seed++;
